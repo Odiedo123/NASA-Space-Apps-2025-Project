@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nairobi Urban Intelligence Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="theme-toggle">
+            <input type="checkbox" id="theme-toggle" />
+            <div class="slider round"></div>
+        </label>
+        <em>Dark Mode</em>
+    </div>
+    <div id="map"></div>
+    
+    <div id="controls">
+<div id="controls">
+<div id="controls">
+    <button id="heatBtn">🔥 Heat</button>
+    <button id="greenBtn">🌳 Green Cover</button>
+    <button id="airBtn">💨 Air Quality</button>
+    <button id="popBtn">👨‍👩‍👧‍👦 Population</button>
+    <button id="landuseBtn">🏗️ Land Use</button>
+    <button id="trafficBtn">💡 Activity</button>
+    <button id="floodBtn">🌊 Flood Risk</button>
+</div>
+</div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>

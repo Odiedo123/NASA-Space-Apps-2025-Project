@@ -1,0 +1,153 @@
+/* --- Base and Map Styles --- */
+html, body, #map {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- Legend Styles --- */
+.legend {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    line-height: 24px;
+    color: #333;
+}
+.legend h4 { 
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+.legend i { 
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    border-radius: 4px;
+}
+
+/* --- Modern Toggle Button Styles --- */
+#controls {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: #fff;
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    display: flex; /* This arranges buttons in a row */
+    gap: 4px; /* This adds a small space between buttons */
+}
+
+#controls button {
+    padding: 10px 20px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    background-color: transparent; /* Start with no background */
+    border: none; /* Remove default borders */
+    border-radius: 8px; /* Rounded corners for each button */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out; /* Smooth transition for all properties */
+}
+
+#controls button:hover:not(.active) {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    color: #111;
+}
+
+#controls button.active {
+    background-color: #007aff; /* A more modern blue */
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0, 122, 255, 0.4); /* Subtle shadow to make it pop */
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1001; /* Make sure it's above the map */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+.theme-switch-wrapper em {
+    margin-left: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #007aff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- Dark Mode Styles for Legend --- */
+body.dark-mode .legend {
+    background: rgba(50, 50, 50, 0.8);
+    color: #f0f0f0;
+}
+body.dark-mode .theme-switch-wrapper {
+    background: rgba(50, 50, 50, 0.8);
+}
+body.dark-mode .theme-switch-wrapper em {
+    color: #f0f0f0;
+}
