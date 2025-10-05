@@ -3,37 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nairobi Urban Intelligence Map</title>
+    <title>Cellular Cities</title>
+    
+    <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+    <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
+    
     <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    
     <link rel="stylesheet" href="styles.css">
-        <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+    <link
+      rel="icon"
+      href="logo.png"
+      type="image/png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="theme-toggle">
-            <input type="checkbox" id="theme-toggle" />
-            <div class="slider round"></div>
-        </label>
-        <em>Dark Mode</em>
-    </div>
-    <div id="map"></div>
-    
-    <div id="controls">
-<div id="controls">
-<div id="controls">
-    <button id="heatBtn">🔥 Heat</button>
-    <button id="greenBtn">🌳 Green Cover</button>
-    <button id="airBtn">💨 Air Quality</button>
-    <button id="popBtn">👨‍👩‍👧‍👦 Population</button>
-    <button id="landuseBtn">🏗️ Land Use</button>
-    <button id="trafficBtn">💡 Activity</button>
-    <button id="floodBtn">🌊 Flood Risk</button>
-</div>
-</div>
+
+    <div id="loader-overlay">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Analyzing Urban Data...</p>
+        </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <div id="app-container">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.png" alt="Logo" class="logo">
+                <h1>Cellular Cities</h1>
+            </div>
+
+            <div id="controls">
+                <div class="control-group">
+                    <h3>Analysis Layers</h3>
+                    <button id="opportunityBtn">🎯 Opportunity Score</button>
+                    <button id="planBtn">🏙️ Proposed Plan</button>
+                </div>
+                <div class="control-group">
+                    <h3>NASA Data Layers</h3>
+                    <button id="heatBtn" class="active">🔥 Urban Heat</button>
+                    <button id="greenBtn">🌳 Green Cover</button>
+                    <button id="airBtn">💨 Air Quality</button>
+                    <button id="popBtn">👨‍👩‍👧‍👦 Population</button>
+                    <button id="landuseBtn">🏗️ Land Use</button>
+                    <button id="floodBtn">🌊 Flood Risk</button>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="theme-switch-wrapper">
+                    <em>Dark Mode</em>
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id="map-container">
+            <div id="map"></div>
+            <div id="legend"></div>
+        </div>
+    </div>
+    
     <script src="map.js"></script>
+
 </body>
 </html>

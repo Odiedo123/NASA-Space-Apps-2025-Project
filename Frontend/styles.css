@@ -1,153 +1,220 @@
-/* --- Base and Map Styles --- */
-html, body, #map {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* --- GLOBAL STYLES & RESETS --- */
+:root {
+    --bg-light: #f8f9fa;
+    --bg-dark: #2c3e50;
+    --text-light: #212529;
+    --text-dark: #ecf0f1;
+    --card-light: #ffffff;
+    --card-dark: #34495e;
+    --primary-color: #3498db;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: #dee2e6;
+    --border-dark: #4a627a;
 }
 
-/* --- Legend Styles --- */
-.legend {
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    line-height: 24px;
-    color: #333;
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color 0.3s, color 0.3s;
 }
-.legend h4 { 
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
+
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
-.legend i { 
+
+/* --- APP LAYOUT --- */
+#app-container {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 280px;
+    background-color: var(--card-light);
+    box-shadow: 2px 0 10px var(--shadow-color);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #sidebar {
+    background-color: var(--card-dark);
+}
+
+#map-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- SIDEBAR CONTENT --- */
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+body.dark-mode .sidebar-header {
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+#controls {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.control-group {
+    margin-bottom: 25px;
+}
+
+.control-group h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: #95a5a6;
+}
+body.dark-mode .control-group h3 {
+    color: #bdc3c7;
+}
+
+#controls button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    cursor: pointer;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode #controls button {
+    background-color: var(--card-dark);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+}
+
+#controls button:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#controls button.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    font-weight: 500;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+}
+body.dark-mode .sidebar-footer {
+    border-top: 1px solid var(--border-dark);
+}
+
+/* --- LEGEND & POPUPS --- */
+#legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: var(--card-light);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    max-width: 200px;
+}
+
+body.dark-mode #legend {
+    background: var(--card-dark);
+}
+
+#legend h4 { margin: 0 0 10px 0; }
+#legend i {
     width: 18px;
     height: 18px;
     float: left;
     margin-right: 8px;
-    border-radius: 4px;
+    opacity: 0.8;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* --- Modern Toggle Button Styles --- */
-#controls {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: #fff;
-    padding: 6px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-    display: flex; /* This arranges buttons in a row */
-    gap: 4px; /* This adds a small space between buttons */
+.maplibregl-popup-content {
+    background: var(--card-light);
+    color: var(--text-light);
+    padding: 15px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+body.dark-mode .maplibregl-popup-content {
+    background: var(--card-dark);
+    color: var(--text-dark);
+}
+.maplibregl-popup-content h3, .maplibregl-popup-content h4 {
+    margin-top: 0;
+}
+.maplibregl-popup-content p {
+    margin: 5px 0;
 }
 
-#controls button {
-    padding: 10px 20px;
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: #555;
-    background-color: transparent; /* Start with no background */
-    border: none; /* Remove default borders */
-    border-radius: 8px; /* Rounded corners for each button */
-    cursor: pointer;
-    transition: all 0.2s ease-in-out; /* Smooth transition for all properties */
-}
 
-#controls button:hover:not(.active) {
-    background-color: #f0f0f0; /* Light gray background on hover */
-    color: #111;
-}
+/* --- DARK MODE SWITCH --- */
+.theme-switch-wrapper { display: flex; align-items: center; justify-content: space-between; }
+.theme-switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.theme-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--primary-color); }
+input:focus + .slider { box-shadow: 0 0 1px var(--primary-color); }
+input:checked + .slider:before { transform: translateX(26px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
 
-#controls button.active {
-    background-color: #007aff; /* A more modern blue */
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 1px 4px rgba(0, 122, 255, 0.4); /* Subtle shadow to make it pop */
+/* --- LOADING SCREEN --- */
+#loader-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(44, 62, 80, 0.9); z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    color: white; text-align: center; font-size: 1.2em;
 }
-
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1001; /* Make sure it's above the map */
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3); border-top: 8px solid #fff;
+    border-radius: 50%; width: 60px; height: 60px;
+    animation: spin 1.5s linear infinite; margin: 0 auto 20px auto;
 }
-
-.theme-switch-wrapper em {
-    margin-left: 10px;
-    font-size: 1rem;
-    color: #555;
-}
-
-.theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 28px;
-}
-
-.theme-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-}
-
-input:checked + .slider {
-    background-color: #007aff;
-}
-
-input:checked + .slider:before {
-    transform: translateX(22px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-/* --- Dark Mode Styles for Legend --- */
-body.dark-mode .legend {
-    background: rgba(50, 50, 50, 0.8);
-    color: #f0f0f0;
-}
-body.dark-mode .theme-switch-wrapper {
-    background: rgba(50, 50, 50, 0.8);
-}
-body.dark-mode .theme-switch-wrapper em {
-    color: #f0f0f0;
-}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
